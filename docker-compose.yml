@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+    ttn-hooks:
+        restart: always
+        image: juanjofranco/imagename:latest
+        environment:
+            - HTTP_HOST=0.0.0.0
+            - HTTP_PORT=8888
+        ports:
+            - '8888:8888'
