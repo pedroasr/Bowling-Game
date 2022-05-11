@@ -3,6 +3,8 @@ import { BowlingGame, buildBowlingGame } from "@src/bowling-game";
 function makeRolls(game: BowlingGame, rolls: number, pins: number) {
     for(let i = 0; i < rolls; i++) {
         game.roll(pins);
+        if (pins === 10)
+            game.roll(0);
     }
 }
 
@@ -19,6 +21,7 @@ function makeFrame(game: BowlingGame, firstRollPins: number, secondRollPins: num
 
 function makeStrike(game: BowlingGame, firstRollPins: number, secondRollPins: number) {
     game.roll(10);
+    game.roll(0);
     game.roll(firstRollPins);
     game.roll(secondRollPins);
 }
@@ -86,10 +89,12 @@ describe('Bowling score', () => {
         expect(game.score()).toBe(38);
     });
 
-    test('should do the prfect score', () => {
+    test('should do the perfect score', () => {
         const game = buildBowlingGame();
-        makeRolls(game, 12, 10);
-
+        makeRolls(game, 9, 10);
+        game.roll(10);
+        game.roll(10);
+        game.roll(10);
 
         expect(game.score()).toBe(300);
     });
